@@ -23,6 +23,7 @@ export default function Home() {
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider)
     const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider)
     const data = await marketContract.fetchMarketItems()
+    console.log(data)
 
     const items = await Promise.all(data.map(async i => {
       const tokeUri = await tokenContract.tokenURI(i.tokenId)
@@ -40,6 +41,7 @@ export default function Home() {
       return item
     }))
     setNfts(items)
+    console.log(items);
     setLoadingState('loaded')
   }
 
@@ -64,6 +66,7 @@ export default function Home() {
   )
 
   return (
+
     <div className="flex justify-center">
       <div className="px-4" style={{ maxWidth: '1600px' }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
